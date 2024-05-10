@@ -1,0 +1,83 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "测试"
+      }
+    },
+    {
+      "path": "pages/user/user",
+      "style": {
+        "navigationBarTitleText": "测试"
+      }
+    },
+    {
+      "path": "pages/home/home",
+      "style": {
+        "navigationBarTitleText": "测试"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "wawa",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "navigationStyle": "custom"
+  },
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "mui-(.*)": "@miniprogram/mui/lib/mui/mui-$1/mui-$1.vue"
+    }
+  },
+  "subPackages": [
+    {
+      "root": "subpagesB",
+      "pages": [
+        {
+          "path": "pages/user/user",
+          "style": {
+            "navigationBarTitleText": "测试"
+          }
+        },
+        {
+          "path": "pages/index/index",
+          "style": {
+            "navigationBarTitleText": "测试"
+          }
+        },
+        {
+          "path": "pages/home/home",
+          "style": {
+            "navigationBarTitleText": "测试"
+          }
+        }
+      ]
+    },
+    {
+      "root": "subpagesA",
+      "pages": [
+        {
+          "path": "pages/user/user",
+          "style": {
+            "navigationBarTitleText": "测试"
+          }
+        },
+        {
+          "path": "pages/index/index",
+          "style": {
+            "navigationBarTitleText": "测试"
+          }
+        },
+        {
+          "path": "pages/home/home",
+          "style": {
+            "navigationBarTitleText": "测试1111"
+          }
+        }
+      ]
+    }
+  ]
+}

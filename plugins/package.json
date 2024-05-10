@@ -1,0 +1,45 @@
+{
+  "name": "@miniprogram/plugins",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "exports": {
+    ".": {
+      "types": "./build/index.d.ts",
+      "import": "./build/index.js",
+      "require": "./build/index.cjs"
+    }
+  },
+  "main": "build/index.js",
+  "files": [
+    "build",
+    "src"
+  ],
+  "scripts": {
+    "dev": "rollup -c -w",
+    "build": "rollup -c"
+  },
+  "peerDependencies": {
+    "ali-oss": "^6.20.0",
+    "chokidar": "^3.6.0",
+    "glob": "^10.3.12",
+    "hasha": "^6.0.0",
+    "miniprogram-ci": "^1.9.15",
+    "vite": "4.3.5"
+  },
+  "devDependencies": {
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/ali-oss": "^6.16.11",
+    "@types/node": "^18.17.1",
+    "rollup": "^4.13.0",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "tslib": "^2.6.2"
+  }
+}

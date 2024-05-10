@@ -1,0 +1,8 @@
+packages:
+  - icon
+  - miniprogram
+  - mui
+  - navigate
+  - plugins
+  - request
+  - utils

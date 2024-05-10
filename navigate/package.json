@@ -1,0 +1,39 @@
+{
+  "name": "@miniprogram/navigate",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "exports": {
+    ".": {
+      "types": "./build/index.d.ts",
+      "import": "./build/index.js"
+    }
+  },
+  "main": "build/index.js",
+  "module": "./build/index.js",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "dev": "rollup -c -w",
+    "build": "rollup -c"
+  },
+  "peerDependencies": {
+    "vue": "^3.3.11"
+  },
+  "devDependencies": {
+    "@dcloudio/types": "^3.3.2",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/node": "^18.17.1",
+    "rollup": "^4.13.0",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "tslib": "^2.6.2"
+  }
+}

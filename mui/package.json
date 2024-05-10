@@ -1,0 +1,38 @@
+{
+  "name": "@miniprogram/mui",
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "directories": {
+    "lib": "lib"
+  },
+  "main": "build/index.js",
+  "module": "build/index.js",
+  "typings": "index.d.ts",
+  "files": [
+    "build",
+    "lib"
+  ],
+  "scripts": {
+    "dev": "rollup -c -w",
+    "build": "rollup -c"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "vue": "^3.3.11"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.3",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/node": "^18.17.1",
+    "rollup": "^4.13.0",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "tslib": "^2.6.2"
+  }
+}
