@@ -12,6 +12,13 @@ export default [
   ...tseslint.configs.recommended,
   ...pluginVue.configs['flat/recommended'],
   {
+    rules: {
+      semi: ["error", "never"],
+      "vue/multi-word-component-names": "off",
+      "no-undef": "off",
+    },
+  },
+  {
     ignores: [
       "**/dist/**/*.js",
       "**/dist/**/*.ts",
@@ -20,10 +27,5 @@ export default [
       "**/node_modules/**/*.js",
       "**/node_modules/**/*.ts"
     ],
-    rules: {
-      semi: ["error", "never"],
-      "vue/multi-word-component-names": "off",
-      "no-undef": "off",
-    },
   }
 ]
