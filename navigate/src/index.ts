@@ -1,22 +1,25 @@
 import type { App } from "vue"
 
-type SwitchTabOptions<T> = Omit<UniApp.SwitchTabOptions, "url"> & {
+type NavigateOptions = "url"
+
+type SwitchTabOptions<T> = Omit<UniApp.SwitchTabOptions, NavigateOptions> & {
     query?: Record<string, string>;
     url: T;
 };
-type ReLaunchOptions<T> = Omit<UniApp.ReLaunchOptions, "url"> & {
+type ReLaunchOptions<T> = Omit<UniApp.ReLaunchOptions, NavigateOptions> & {
     query?: Record<string, string>;
     url: T;
 };
-type RedirectToOptions<T> = Omit<UniApp.RedirectToOptions, "url"> & {
+type RedirectToOptions<T> = Omit<UniApp.RedirectToOptions, NavigateOptions> & {
     query?: Record<string, string>;
     url: T;
 };
-type NavigateToOptions<T> = Omit<UniApp.NavigateToOptions, "events" | "url"> & {
+type NavigateToOptions<T> = Omit<UniApp.NavigateToOptions, "events" | NavigateOptions> & {
     query?: Record<string, string>;
     url: T;
 };
-type UrlResultType = string | number
+type NavigateResultType = string | number
+type NavigateResultObject = Record<string, NavigateResultType>
 
 const EVENT_GET = "miniprogram-event-get-key"
 const EVENT_SET = "miniprogram-event-set-key"
@@ -28,7 +31,7 @@ export class RouterInterruptError extends Error {
 }
 
 
-function parseUrl(url: string, query?: Record<string, UrlResultType>) {
+function parseUrl(url: string, query?: NavigateResultObject) {
     if (query) {
         const q = []
         for (const [key, value] of Object.entries(query)) {
@@ -66,7 +69,7 @@ function navigateBack(options?: UniApp.NavigateBackOptions) {
     return uni.navigateBack(options)
 }
 
-function back(result?: Record<string, UrlResultType>) {
+function back(result?: NavigateResultObject) {
     const page = currentPage()
     if (page) {
         const data = map.get(page)
@@ -82,9 +85,9 @@ function back(result?: Record<string, UrlResultType>) {
     uni.navigateBack()
 }
 
-function navigate<T extends string>(options: NavigateToOptions<T>, data?: Record<string, UrlResultType>) {
+function navigate<T extends string, R = NavigateResultObject>(options: NavigateToOptions<T>, data?: R) {
     Reflect.deleteProperty(options, "events")
-    return new Promise((resolve, reject) => {
+    return new Promise<R>((resolve, reject) => {
         const getEventName = `event-get-${Math.floor(Math.random() * 10000000) + Date.now()}`
         const setEventName = `event-set-${Math.floor(Math.random() * 10000000) + Date.now()}`
         if (!options.query) {
@@ -105,7 +108,7 @@ function navigate<T extends string>(options: NavigateToOptions<T>, data?: Record
             animationType: options.animationType,
             animationDuration: options.animationDuration,
             events: {
-                [getEventName](result: Record<string, UrlResultType>) {
+                [getEventName](result: R) {
                     resolve(result)
                 },
             },
@@ -124,7 +127,7 @@ function navigate<T extends string>(options: NavigateToOptions<T>, data?: Record
     })
 }
 
-export function onNavigate(query?: AnyObject, fn?: (result?: Record<string, UrlResultType>) => void) {
+export function onNavigate(query?: AnyObject, fn?: (result?: NavigateResultObject) => void) {
     if (query) {
         const setEventName = query[EVENT_SET]
         const instance = currentInstance()
@@ -201,14 +204,14 @@ interface Handlers<T>{
 
 export class Nav<T extends string> {
 
-    fulfilled: Handlers<T>['fulfilled'][] = []
+    #fulfilled: Handlers<T>['fulfilled'][] = []
 
     #assignNext(options: SwitchTabOptions<T> | ReLaunchOptions<T> | RedirectToOptions<T> | NavigateToOptions<T>, next: NextOption<T>) {
         Object.assign(options, next)
     }
 
     async switchTab(options: SwitchTabOptions<T>) {
-        const next = await this.execFulfilled( { url: options.url, query: options.query } )
+        const next = await this.#execFulfilled( { url: options.url, query: options.query } )
         if (next === false) 
             throw new RouterInterruptError('Routing jump interrupt')
         this.#assignNext(options, next)
@@ -216,7 +219,7 @@ export class Nav<T extends string> {
     }
 
     async reLaunch(options: ReLaunchOptions<T>) {
-        const next = await this.execFulfilled( { url: options.url, query: options.query } )
+        const next = await this.#execFulfilled( { url: options.url, query: options.query } )
         if (next === false) 
             throw new RouterInterruptError('Routing jump interrupt')
         this.#assignNext(options, next)
@@ -224,7 +227,7 @@ export class Nav<T extends string> {
     }
 
     async redirectTo(options: RedirectToOptions<T>) {
-        const next = await this.execFulfilled( { url: options.url, query: options.query } )
+        const next = await this.#execFulfilled( { url: options.url, query: options.query } )
         if (next === false) 
             throw new RouterInterruptError('Routing jump interrupt')
         this.#assignNext(options, next)
@@ -232,7 +235,7 @@ export class Nav<T extends string> {
     }
 
     async navigateTo(options: NavigateToOptions<T>) {
-        const next = await this.execFulfilled( { url: options.url, query: options.query } )
+        const next = await this.#execFulfilled( { url: options.url, query: options.query } )
         if (next === false) 
             throw new RouterInterruptError('Routing jump interrupt')
         this.#assignNext(options, next)
@@ -243,24 +246,24 @@ export class Nav<T extends string> {
         return navigateBack(options)
     }
 
-    back(result?: Record<string, UrlResultType>) {
+    back(result?: NavigateResultObject) {
         return back(result)
     }
 
-    async navigate(options: NavigateToOptions<T>, data?: Record<string, UrlResultType>) {
-        const next = await this.execFulfilled( { url: options.url, query: options.query } )
+    async navigate(options: NavigateToOptions<T>, data?: NavigateResultObject) {
+        const next = await this.#execFulfilled( { url: options.url, query: options.query } )
         if (next === false) 
             throw new RouterInterruptError('Routing jump interrupt')
         this.#assignNext(options, next)
         return navigate(options, data)
     }
 
-    async execFulfilled(to: Parameters<Handlers<T>['fulfilled']>[0]): Promise<NextOption<T> | false> {
+    async #execFulfilled(to: Parameters<Handlers<T>['fulfilled']>[0]): Promise<NextOption<T> | false> {
         const page = currentPage()
         const from: Parameters<Handlers<T>['fulfilled']>[1] = { url: page?.route }
         let _to = to
-        for (let index = 0; index < this.fulfilled.length; index++) {
-            const func = this.fulfilled[index]
+        for (let index = 0; index < this.#fulfilled.length; index++) {
+            const func = this.#fulfilled[index]
             const next = await func(_to, from)
             if (next === false) {
                 return false
@@ -273,6 +276,6 @@ export class Nav<T extends string> {
     }
 
     beforeEach(fn: Handlers<T>['fulfilled']) {
-        this.fulfilled.push(fn)
+        this.#fulfilled.push(fn)
     }
 }

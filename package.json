@@ -12,7 +12,8 @@
     "postinstall": "husky install",
     "preinstall": "npx only-allow pnpm",
     "commitlint": "commitlint --edit",
-    "commit": "cz"
+    "commit": "cz",
+    "lint-staged": "lint-staged"
   },
   "devDependencies": {
     "eslint": "^9.2.0",
@@ -33,7 +34,7 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,ts,vue}": [
+    "**/*.{js,ts,jsx,tsx,vue}": [
       "eslint --fix"
     ]
   }

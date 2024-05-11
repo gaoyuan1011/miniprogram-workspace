@@ -1,9 +1,9 @@
 import { navigatePlugin } from '@miniprogram/navigate'
-import Appp from './App.vue'
+import App from './App.vue'
 import { createSSRApp } from "vue"
 
 export function createApp() {
-  const app = createSSRApp(Appp)
+  const app = createSSRApp(App)
   app.use(navigatePlugin())
   return {
     app

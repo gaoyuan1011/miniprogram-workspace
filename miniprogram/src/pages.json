@@ -7,13 +7,13 @@
       }
     },
     {
-      "path": "pages/user/user",
+      "path": "pages/home/home",
       "style": {
         "navigationBarTitleText": "测试"
       }
     },
     {
-      "path": "pages/home/home",
+      "path": "pages/user/user",
       "style": {
         "navigationBarTitleText": "测试"
       }
@@ -37,7 +37,7 @@
       "root": "subpagesB",
       "pages": [
         {
-          "path": "pages/user/user",
+          "path": "pages/home/home",
           "style": {
             "navigationBarTitleText": "测试"
           }
@@ -49,7 +49,7 @@
           }
         },
         {
-          "path": "pages/home/home",
+          "path": "pages/user/user",
           "style": {
             "navigationBarTitleText": "测试"
           }
@@ -60,9 +60,9 @@
       "root": "subpagesA",
       "pages": [
         {
-          "path": "pages/user/user",
+          "path": "pages/home/home",
           "style": {
-            "navigationBarTitleText": "测试"
+            "navigationBarTitleText": "测试1111"
           }
         },
         {
@@ -72,9 +72,9 @@
           }
         },
         {
-          "path": "pages/home/home",
+          "path": "pages/user/user",
           "style": {
-            "navigationBarTitleText": "测试1111"
+            "navigationBarTitleText": "测试"
           }
         }
       ]

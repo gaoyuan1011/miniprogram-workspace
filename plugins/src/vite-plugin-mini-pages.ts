@@ -12,7 +12,8 @@ interface Options {
     rootPath: string
 }
 
-type PageConfig = { path: string, root: string, style: Record<string, string>, order: number }
+type PageConfig = { path: string, root?: string, style: Record<string, string>, order: number }
+type RouterData = { annotation:string, text: string, enum: string }
 
 let isWatch = false
 async function watchFile(options: Options) {
@@ -20,13 +21,18 @@ async function watchFile(options: Options) {
     isWatch = true
     try {
 
-        const router: {annotation:string, text: string, enum: string}[] = []
+        const router: RouterData[] = []
         const pagesStr = fs.readFileSync(options.pagesFile).toString()
         const pagesObj = JSON.parse(pagesStr)
-        const map = new Map<string, Partial<PageConfig>>()
+        const map = new Map<string, PageConfig>()
+        const routerMap = new Map<string, RouterData>()
         function getItem(key: string) {
             if (!map.has(key)) {
-                map.set(key, {})
+                map.set(key, {
+                    path: '',
+                    style: {},
+                    order: 0,
+                })
             }
             return map.get(key)
         }
@@ -41,6 +47,14 @@ async function watchFile(options: Options) {
                 if (obj) {
                     obj.path = key
                 }
+
+                const rItem = {
+                    text: `${key.split('/')[1].toLocaleUpperCase()}: '/${key}'`,
+                    annotation: `/** /${key} */`,
+                    enum: `${key.split('/')[1].toLocaleUpperCase()} = '/${key}'`,
+                }
+                routerMap.set(key, rItem)
+                router.push(rItem)
             }
             if (p.endsWith('.json')) {
                 const style = JSON.parse(fs.readFileSync(fItem).toString())
@@ -49,11 +63,12 @@ async function watchFile(options: Options) {
                 if (obj) {
                     Object.assign(obj, style)
                 }
-                router.push({
-                    text: `${style.name ?? key.split('/')[1].toLocaleUpperCase()}: '/${key}'`,
-                    annotation: `/** /${key} */`,
-                    enum: `${style.name ?? key.split('/')[1].toLocaleUpperCase()} = '/${key}'`,
-                })
+                const rItem = routerMap.get(key)
+                if (rItem) {
+                    rItem.text = `${style.name ?? key.split('/')[1].toLocaleUpperCase()}: '/${key}'`
+                    rItem.annotation = `/** /${key} */`
+                    rItem.enum = `${style.name ?? key.split('/')[1].toLocaleUpperCase()} = '/${key}'`
+                }
             }
         }
 
@@ -71,6 +86,14 @@ async function watchFile(options: Options) {
                         obj.root = keys[0]
                         obj.path = keys.slice(1).join('/')
                     }
+
+                    const rItem = {
+                        text: `${[keys[0], keys[2]].join('_').toLocaleUpperCase()}: '/${key}'`,
+                        annotation: `/** /${key} */`,
+                        enum: `${[keys[0], keys[2]].join('_').toLocaleUpperCase()} = '/${key}'`
+                    }
+                    routerMap.set(key, rItem)
+                    router.push(rItem)
                 }
                 if (p.endsWith('.json')) {
                     const style = JSON.parse(fs.readFileSync(subItem).toString())
@@ -82,16 +105,17 @@ async function watchFile(options: Options) {
                     
                     const keys = key.split('/')
 
-                    router.push({
-                        text: `${style.name ?? [keys[0], keys[2]].join('_').toLocaleUpperCase()}: '/${key}'`,
-                        annotation: `/** /${key} */`,
-                        enum: `${style.name ?? [keys[0], keys[2]].join('_').toLocaleUpperCase()} = '/${key}'`
-                    })
+                    const rItem = routerMap.get(key)
+                    if (rItem) {
+                        rItem.text = `${style.name ?? [keys[0], keys[2]].join('_').toLocaleUpperCase()}: '/${key}'`
+                        rItem.annotation = `/** /${key} */`
+                        rItem.enum = `${style.name ?? [keys[0], keys[2]].join('_').toLocaleUpperCase()} = '/${key}'`
+                    }
                 }
             }
         }
 
-        const pagesList = [...map.values()]
+        const pagesList = [...map.values()].sort((a, b) => a.path.localeCompare(b.path))
         const pages: Partial<PageConfig>[] = []
         const subPackages = new Map()
         for (let index = 0; index < pagesList.length; index++) {

@@ -54,7 +54,6 @@ export class AbortController {
     signal: string
     constructor() {
         this.signal = generateUUID()
-        console.info(this.signal)
     }
 }
 
@@ -260,12 +259,12 @@ export class Request {
     }
 
     uploadQueue(files: string | string[], options: Omit<UploadOptions, 'filePath'>, queue = 5) {
-        return new Promise<boolean>((resolve) => {
+        return new Promise<UniApp.UploadFileSuccessCallbackResult[]>((resolve) => {
+            const list: UniApp.UploadFileSuccessCallbackResult[] = []
             const concurrent = concurrentQueue({
                 taskNum: queue,
                 done: () => {
-                    console.info('done')
-                    resolve(true)
+                    resolve(list)
                 }
             })
             let _files: string[] = []
@@ -282,7 +281,7 @@ export class Request {
                         this.upload({
                             ...options,
                             filePath: file
-                        }).finally(() => {
+                        }).then(data => list.push(data)).finally(() => {
                             concurrent.done()
                             concurrent.next()
                         })

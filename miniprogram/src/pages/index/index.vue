@@ -95,6 +95,11 @@ function onUpload() {
         url: '/upload',
         name: 'file',
       })
+      request.upload({
+        url: '/upload',
+        name: 'file',
+        filePath: res.tempFilePaths[0]
+      })
     }
   })
 }
