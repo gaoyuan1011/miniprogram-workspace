@@ -23,8 +23,9 @@
 
 [使用@vue/cli创建，模版选择使用vite+ts](https://uniapp.dcloud.net.cn/quickstart-cli.html)，`npx degit dcloudio/uni-preset-vue#vite-ts 项目名称`  ，创建模版的命令，名称暂用`miniprogram`代替，下载完毕后需要修改地方。
 
+修改`package.json`
+
 ```json
-// package.json
 {
 	"type": "module"
 }
@@ -51,12 +52,13 @@ export default defineConfig({
 这个插件的作用是自动生成pages.json文件，支持每个页面独立的json配置文件。插件源码[查看](https://github.com/gaoyuan1011/miniprogram-workspace/blob/main/plugins/src/vite-plugin-mini-pages.ts)
 
 ```json
-// index.jso，和index.vue 同级目录
+/** index.json，和index.vue 同级目录 */
 {
   "style": {
     "navigationBarTitleText": "测试"
   },
-  "order": -1, // 排序 生序
+  /** 排序 生序 */
+  "order": -1, 
   "name": "路由名称"
 }
 ```
@@ -131,7 +133,6 @@ import { vitePluginOssAssets } from '@miniprogram/plugins'
 ```
 
 ```html
-
 <image
   class="w-[200rpx] h-[200rpx] mb-[50rpx] mx-auto"
   src="@/assets/logo.png"
@@ -514,7 +515,7 @@ export default [
 主流编辑器`vscode`配置`eslint` ，参考https://github.com/antfu/eslint-config。
 
 ```json
-// .code-workspace 模式
+/** .code-workspace 模式 */
 {
 	"settings": {
 		"editor.formatOnSave": true,
@@ -555,7 +556,7 @@ export default [
 	}
 }
 
-// .vscode/settings.json 模式
+/** .vscode/settings.json 模式 */
 {
   "eslint.experimental.useFlatConfig": true,
   "prettier.enable": false,
@@ -606,11 +607,11 @@ pnpm install -wD @commitlint/cli @commitlint/config-conventional husky
 `package.json` 添加脚本
 
 ```json
-// package.json 添加脚本
+/** package.json 添加脚本 */
 {
 	"scripts": {
-	  "preinstall": "npx only-allow pnpm", // 强制使用pnpm
-	  "postinstall": "husky install", // 初始化 husky
+	  "preinstall": "npx only-allow pnpm", /** 强制使用pnpm */
+	  "postinstall": "husky install", /** 初始化 husky */
 	  "commitlint": "commitlint --edit"
 	}
 }
@@ -646,7 +647,7 @@ pnpm install -wD cz-conventional-changelog commitizen
 `package.json` 添加脚本
 
 ```json
-// package.json 添加脚本
+/** package.json 添加脚本 */
 {
 	"scripts": {
 	  "commit": "cz"
@@ -674,7 +675,7 @@ pnpm install -wD lint-staged
 ```
 
 ```json
-// package.json 添加脚本
+/** package.json 添加脚本 */
 
 {
 	"scripts": {
