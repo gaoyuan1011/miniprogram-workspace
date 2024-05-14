@@ -77,7 +77,6 @@
     "@uni-helper/vite-plugin-uni-tailwind": "^0.15.0",
     "@vue/runtime-core": "^3.3.11",
     "@vue/tsconfig": "^0.5.1",
-    "glob": "^10.3.12",
     "postcss-preset-env": "^9.5.9",
     "sass": "^1.75.0",
     "tailwind-extensions": "^0.22.1",

@@ -702,3 +702,16 @@ echo 'pnpm lint-staged' > .husky/pre-commit
 这个模版不限于小程序，可以扩展到其他项目中，主要学习的是编程思维，让技术为自己所用。
 
 也感谢大佬们的开源精神，我也奉上我这套模版的 https://github.com/gaoyuan1011/miniprogram-workspace 地址，有需求的可以通过 https://github.com/gaoyuan1011/miniprogram-workspace/issues 联系我，欢迎一起交流技术。
+
+## 代码运行指南
+
+```bash
+# 安装pnpm
+npm i -g pnpm
+# 项目根目录运行
+pnpm i
+# 项目构建
+pnpm -r run build
+
+# 成功运行不妨给个小星星
+```

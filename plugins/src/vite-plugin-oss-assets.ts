@@ -85,7 +85,7 @@ export function vitePluginOssAssets(options: VitePluginOssAssetsOptions & { root
     },
     closeBundle() {
       if (options.enable){
-        let fList = glob.globSync(`${options.assetsPath}/**`)
+        let fList = glob.globSync(`${options.assetsPath}/**`).map(f => normalizePath(f))
         fList = fList.filter(f => !fs.statSync(f).isDirectory() && !list.includes(f))
         if (fList.length) {
           console.info('未使用的资源：\n')

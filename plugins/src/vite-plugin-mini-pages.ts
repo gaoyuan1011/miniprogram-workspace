@@ -3,6 +3,7 @@ import chokidar from 'chokidar'
 import * as glob from 'glob'
 import * as fs from 'node:fs'
 import * as path from 'node:path'
+import { normalizePath } from 'vite'
 
 interface Options {
     paths: string
@@ -37,10 +38,10 @@ async function watchFile(options: Options) {
             return map.get(key)
         }
 
-        const fList = await glob.glob(`${options.paths}/**/*.{vue,json}`)
+        const fList = await glob.glob(`${normalizePath(options.paths)}/**/*.{vue,json}`)
         for (let index = 0; index < fList.length; index++) {
             const fItem = fList[index]
-            const p = path.relative(options.rootPath, fItem)
+            const p = normalizePath(path.relative(options.rootPath, fItem))
             if (p.endsWith('.vue')) {
                 const key = p.replace('.vue', '')
                 const obj = getItem(key)
@@ -72,48 +73,55 @@ async function watchFile(options: Options) {
             }
         }
 
-        for (let index = 0; index < options.subPaths.length; index++) {
-            const sub = options.subPaths[index]
-            const subList = await glob.glob(`${sub}/**/*.{vue,json}`)
-            for (let index = 0; index < subList.length; index++) {
-                const subItem = subList[index]
-                const p = path.relative(options.rootPath, subItem)
-                if (p.endsWith('.vue')) {
-                    const key = p.replace('.vue', '')
-                    const obj = getItem(key)
-                    const keys = key.split('/')
-                    if (obj) {
-                        obj.root = keys[0]
-                        obj.path = keys.slice(1).join('/')
-                    }
+        const subPaths = options.subPaths.map(s => normalizePath(s))
+        for (let index = 0; index < subPaths.length; index++) {
+            const subPathItem = subPaths[index]
+            const fSubList = await glob.glob(normalizePath(subPathItem))
+            for (let index = 0; index < fSubList.length; index++) {
+                const sub = normalizePath(fSubList[index])
+                const subList = await glob.glob(`${sub}/**/*.{vue,json}`)
+                for (let index = 0; index < subList.length; index++) {
+                    const subItem = subList[index]
+                    const p = normalizePath(path.relative(options.rootPath, subItem))
+                    if (p.endsWith('.vue')) {
+                        const key = p.replace('.vue', '')
+                        const obj = getItem(key)
+                        const keys = key.split('/')
+                        if (obj) {
+                            obj.root = keys[0]
+                            obj.path = keys.slice(1).join('/')
+                        }
 
-                    const rItem = {
-                        text: `${[keys[0], keys[2]].join('_').toLocaleUpperCase()}: '/${key}'`,
-                        annotation: `/** /${key} */`,
-                        enum: `${[keys[0], keys[2]].join('_').toLocaleUpperCase()} = '/${key}'`
+                        const rItem = {
+                            text: `${[keys[0], keys[2]].join('_').toLocaleUpperCase()}: '/${key}'`,
+                            annotation: `/** /${key} */`,
+                            enum: `${[keys[0], keys[2]].join('_').toLocaleUpperCase()} = '/${key}'`
+                        }
+                        routerMap.set(key, rItem)
+                        router.push(rItem)
                     }
-                    routerMap.set(key, rItem)
-                    router.push(rItem)
-                }
-                if (p.endsWith('.json')) {
-                    const style = JSON.parse(fs.readFileSync(subItem).toString())
-                    const key = p.replace('.json', '')
-                    const obj = getItem(key)
-                    if (obj) {
-                        Object.assign(obj, style)
-                    }
-                    
-                    const keys = key.split('/')
+                    if (p.endsWith('.json')) {
+                        const style = JSON.parse(fs.readFileSync(subItem).toString())
+                        const key = p.replace('.json', '')
+                        const obj = getItem(key)
+                        if (obj) {
+                            Object.assign(obj, style)
+                        }
+                        
+                        const keys = key.split('/')
 
-                    const rItem = routerMap.get(key)
-                    if (rItem) {
-                        rItem.text = `${style.name ?? [keys[0], keys[2]].join('_').toLocaleUpperCase()}: '/${key}'`
-                        rItem.annotation = `/** /${key} */`
-                        rItem.enum = `${style.name ?? [keys[0], keys[2]].join('_').toLocaleUpperCase()} = '/${key}'`
+                        const rItem = routerMap.get(key)
+                        if (rItem) {
+                            rItem.text = `${style.name ?? [keys[0], keys[2]].join('_').toLocaleUpperCase()}: '/${key}'`
+                            rItem.annotation = `/** /${key} */`
+                            rItem.enum = `${style.name ?? [keys[0], keys[2]].join('_').toLocaleUpperCase()} = '/${key}'`
+                        }
                     }
                 }
             }
         }
+
+        
 
         const pagesList = [...map.values()].sort((a, b) => a.path.localeCompare(b.path))
         const pages: Partial<PageConfig>[] = []
@@ -183,7 +191,12 @@ export function vitePluginMiniPages(options: Options): PluginOption {
                 wPath.push(options.paths)
             }
             if (options.subPaths) {
-                wPath.push(...options.subPaths)
+                const subPaths = options.subPaths.map(s => normalizePath(s))
+                for (let index = 0; index < subPaths.length; index++) {
+                    const sub = subPaths[index]
+                    const fSubList = glob.globSync(normalizePath(sub))
+                    wPath.push(...fSubList)
+                }
             }
             chokidar.watch(wPath).on('all', (event, _path) => {
                 switch (event) {

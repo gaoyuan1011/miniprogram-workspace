@@ -18,9 +18,11 @@
     "build"
   ],
   "scripts": {
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "build": "tsc"
   },
   "devDependencies": {
-    "tslib": "^2.6.2"
+    "tslib": "^2.6.2",
+    "typescript": "^4.9.5"
   }
 }

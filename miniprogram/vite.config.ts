@@ -9,8 +9,8 @@ import tailwindcss from 'tailwindcss'
 import uvtw from '@uni-helper/vite-plugin-uni-tailwind'
 import postcssPresetEnv from 'postcss-preset-env'
 import { vitePluginMiniCiUpload, vitePluginMiniPages, vitePluginOssAssets } from '@miniprogram/plugins'
-import * as glob from 'glob'
 import tailwindcssConfig from './tailwind.config'
+
 
 export default defineConfig((result) => {
   const env = loadEnv(result.mode, process.cwd(), '')
@@ -34,7 +34,7 @@ export default defineConfig((result) => {
       uvtw(),
       vitePluginMiniPages({
         paths: path.join(__dirname, 'src/pages'),
-        subPaths: glob.globSync(path.join(__dirname, 'src/sub*')),
+        subPaths: [path.join(__dirname, 'src/sub*')],
         pagesFile: path.join(__dirname, 'src/pages.json'),
         routerFile: path.join(__dirname, 'src/router.ts'),
         rootPath: path.join(__dirname, 'src'),
