@@ -21,6 +21,9 @@
     "dev": "rollup -c -w",
     "build": "rollup -c"
   },
+  "dependencies": {
+    "@miniprogram/utils": "workspace:0.0.1"
+  },
   "peerDependencies": {
     "vue": "^3.3.11"
   },

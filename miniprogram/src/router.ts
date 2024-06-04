@@ -11,10 +11,10 @@ export const router = {
   SUBPAGESB_INDEX: '/subpagesB/pages/index/index',
   /** /subpagesB/pages/home/home */
   SUBPAGESB_HOME: '/subpagesB/pages/home/home',
-  /** /subpagesA/pages/user/user */
-  SUBPAGESA_USER: '/subpagesA/pages/user/user',
   /** /subpagesA/pages/index/index */
   SUBPAGESA_INDEX: '/subpagesA/pages/index/index',
+  /** /subpagesA/pages/user/user */
+  SUBPAGESA_USER: '/subpagesA/pages/user/user',
   /** /subpagesA/pages/home/home */
   SUBPAGESA_HOME: '/subpagesA/pages/home/home',
 }
@@ -32,10 +32,10 @@ export enum Router {
   SUBPAGESB_INDEX = '/subpagesB/pages/index/index',
   /** /subpagesB/pages/home/home */
   SUBPAGESB_HOME = '/subpagesB/pages/home/home',
-  /** /subpagesA/pages/user/user */
-  SUBPAGESA_USER = '/subpagesA/pages/user/user',
   /** /subpagesA/pages/index/index */
   SUBPAGESA_INDEX = '/subpagesA/pages/index/index',
+  /** /subpagesA/pages/user/user */
+  SUBPAGESA_USER = '/subpagesA/pages/user/user',
   /** /subpagesA/pages/home/home */
   SUBPAGESA_HOME = '/subpagesA/pages/home/home',
 }

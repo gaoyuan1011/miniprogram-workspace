@@ -1,3 +1,4 @@
+import { generateUUID } from "@miniprogram/utils"
 import type { App } from "vue"
 
 type NavigateOptions = "url"
@@ -88,8 +89,9 @@ function back(result?: NavigateResultObject) {
 function navigate<T extends string, R = NavigateResultObject>(options: NavigateToOptions<T>, data?: R) {
     Reflect.deleteProperty(options, "events")
     return new Promise<R>((resolve, reject) => {
-        const getEventName = `event-get-${Math.floor(Math.random() * 10000000) + Date.now()}`
-        const setEventName = `event-set-${Math.floor(Math.random() * 10000000) + Date.now()}`
+        const uuid = generateUUID()
+        const getEventName = `event-get-${uuid}`
+        const setEventName = `event-set-${uuid}`
         if (!options.query) {
             options.query = {}
         }
