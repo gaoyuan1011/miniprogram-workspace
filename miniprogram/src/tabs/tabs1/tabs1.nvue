@@ -1,0 +1,51 @@
+<script setup lang="ts">
+import { nav } from '@/nav'
+import { Router } from '@/router'
+import { RouterInterruptError } from '@miniprogram/navigate'
+
+async function onClick() {
+  console.info('我进去了 home')
+  const aa = await nav.navigate(
+    {
+      url: Router.HOME,
+      query: { key: '1' },
+    },
+    {
+      a: 1,
+    },
+  ).catch(error => {
+	  console.info('error', error)
+    if (error instanceof RouterInterruptError) {
+      console.info('1')
+    }
+    return Promise.reject()
+  })
+
+  console.info('我出来了 home', aa)
+}
+
+</script>
+
+<template>
+  <view
+    class="flex flex-col items-center justify-center"
+    @click="onClick"
+  >
+    <view><text>tabs1</text></view>
+    <view><text>tabs1</text></view>
+    <view><text>tabs1</text></view>
+    <view><text>tabs1</text></view>
+    <view><text>tabs1</text></view>
+    <view><text>tabs1</text></view>
+
+    <view class="test" />
+  </view>
+</template>
+
+<style lang="scss">
+.test {
+	width: 300rpx;
+	height: 200rpx;
+	background-color: #000;
+}
+</style>

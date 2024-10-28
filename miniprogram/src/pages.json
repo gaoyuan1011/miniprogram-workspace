@@ -61,7 +61,7 @@
     "navigationBarTitleText": "wawa",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8",
-    "navigationStyle": "custom"
+    "navigationStyle": "default"
   },
   "easycom": {
     "autoscan": true,
@@ -126,18 +126,26 @@
     "list": [
       {
         "text": "tabs1",
+        "iconPath": "static/tabs/bar/zhijuan.png",
+        "selectedIconPath": "static/tabs/bar/zhijuan_active.png",
         "pagePath": "tabs/tabs1/tabs1"
       },
       {
         "text": "tabs2",
+        "iconPath": "static/tabs/bar/jn.png",
+        "selectedIconPath": "static/tabs/bar/jn_active.png",
         "pagePath": "tabs/tabs2/tabs2"
       },
       {
         "text": "tabs3",
+        "iconPath": "static/tabs/bar/shuju.png",
+        "selectedIconPath": "static/tabs/bar/shuju_active.png",
         "pagePath": "tabs/tabs3/tabs3"
       },
       {
         "text": "tabs4",
+        "iconPath": "static/tabs/bar/wode.png",
+        "selectedIconPath": "static/tabs/bar/wode_active.png",
         "pagePath": "tabs/tabs4/tabs4"
       }
     ]

@@ -1,5 +1,4 @@
 import { navigatePlugin } from '@miniprogram/navigate'
-import "./styles/tailwind.css"
 import App from './App.vue'
 import { createSSRApp } from "vue"
 

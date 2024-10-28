@@ -1,0 +1,36 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { nav } from '@/nav'
+import { Router } from '@/router'
+
+const title = ref('Hello')
+
+function onBack() {
+	nav.reLaunch({
+		url: Router.INDEX
+	})
+  // nav.back({ a: 1 })
+}
+</script>
+
+<template>
+  <view class="flex flex-col items-center justify-center">
+    <image
+      class="w-[200rpx] h-[200rpx] mb-[50rpx] mx-auto"
+      src="@/assets/logo.png"
+    />
+    <view class="flex justify-center">
+      <text class="text-[36rpx] text-[#8f8f94]">
+        {{ title }}
+      </text>
+    </view>
+
+    <button @click="onBack">
+      退出1212
+    </button>
+  </view>
+</template>
+
+<style lang="scss" scoped>
+
+</style>
