@@ -9,7 +9,7 @@ const value = ref('')
     <input
       v-model="value"
       auto-focus
-      placeholder="将会获取焦点"
+      placeholder="将会获取焦点111"
     >
   </view>
 </template>

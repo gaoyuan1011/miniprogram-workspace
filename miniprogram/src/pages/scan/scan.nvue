@@ -1,0 +1,124 @@
+<script>
+	export default {
+		data() {
+			return {
+				livePusher: null,
+				aspect: '1:1',
+				windowWidth: 0,
+				windowHeight: 0
+			}
+		},
+		onLoad() {
+			this.initCamera()
+		},
+		onReady() {
+			this.livePusher = uni.createLivePusherContext("livePusher", this);
+			this.startPreview()
+		},
+		methods: {
+			showDrawer() {
+				this.$refs.showRight.open();
+			},
+			closeDrawer() {
+				this.$refs.showRight.close();
+			},
+			initCamera() {
+				uni.getSystemInfo({
+					success: (res) => {
+						console.info('getSystemInfo', res)
+						this.windowWidth = res.windowWidth
+						this.windowHeight = res.windowHeight
+					}
+				})
+			},
+			statechange() {
+
+			},
+			//开始预览
+			startPreview() {
+				this.livePusher.startPreview({
+					success: result => {
+						console.log(result)
+					}
+				});
+			},
+			onSnapshot() {
+				console.info('onSnapshot')
+				this.livePusher.snapshot({
+					success: e => {
+						console.info(e.message.tempImagePath)
+					}
+				});
+			}
+		}
+	}
+</script>
+
+<template>
+	<view class="scan-box">
+		<!-- <live-pusher id="livePusher" ref="livePusher" class="live-pusher" mode="FHD" beauty="0" whiteness="0"
+			:aspect="aspect" min-bitrate="1000" audio-quality="16KHz" device-position="back" :auto-focus="true"
+			:muted="true" :enable-camera="true" :enable-mic="false" :zoom="false" @statechange="statechange"
+			:style="{ width: windowWidth+'px', height: windowHeight+'px' }">
+		</live-pusher> -->
+		<!-- <cover-view class="snapshot-active">
+			<text class="text" @click="onSnapshot">扫码扫码扫码扫码</text>
+		</cover-view> -->
+		
+		<mui-button>123123</mui-button>
+		
+		<uni-data-picker placeholder="请选择地址" popup-title="请选择城市" collection="opendb-city-china" field="code as value, name as text" orderby="value asc" :step-searh="true" self-field="code" parent-field="parent_code"
+		 @change="onchange" @nodeclick="onnodeclick">
+		</uni-data-picker>
+		
+		<uni-card>
+			<text>这是一个基础卡片示例，内容较少，此示例展示了一个没有任何属性不带阴影的卡片。</text>
+		</uni-card>
+		
+		<view>
+			<button @click="showDrawer" type="primary">右侧弹出 显示Drawer</button>
+			<uni-drawer ref="showRight" mode="right" :mask-click="false">
+				<scroll-view style="height: 100%;" scroll-y="true">
+					<button @click="closeDrawer" type="primary">关闭Drawer</button>
+					<view v-for="item in 60" :key="item">可滚动内容 {{ item }}</view>
+				</scroll-view>
+			</uni-drawer>
+		</view>
+	</view>
+</template>
+
+<style scoped>
+page {
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	position: relative;
+}
+.scan-box {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+.live-pusher {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+.snapshot-active {
+	/* display: inline-block; */
+	/* width: 200rpx; */
+	/* height: 200rpx; */
+	/* border-radius: 50%; */
+	position: absolute;
+	top: 200rpx;
+	left: 0;
+	z-index: 20;
+	/* width: 100%;
+	height: 100%; */
+	/* background-color: rgba(0, 0, 0, 0); */
+}
+.text {
+	color: blue;
+}
+</style>

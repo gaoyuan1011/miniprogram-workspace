@@ -1,6 +1,43 @@
 {
   "pages": [
     {
+      "path": "tabs/tabs1/tabs1",
+      "style": {
+        "navigationBarTitleText": "tabs1"
+      }
+    },
+    {
+      "path": "tabs/tabs2/tabs2",
+      "style": {
+        "navigationBarTitleText": "tabs2"
+      }
+    },
+    {
+      "path": "tabs/tabs3/tabs3",
+      "style": {
+        "navigationBarTitleText": "tabs3"
+      }
+    },
+    {
+      "path": "tabs/tabs4/tabs4",
+      "style": {
+        "navigationBarTitleText": "tabs4"
+      }
+    },
+    {
+      "path": "pages/scan/scan",
+      "style": {
+        "navigationBarTitleText": "扫码"
+      }
+    },
+    {
+      "path": "pages/webview/webview",
+      "style": {
+        "navigationBarTitleText": "扫码",
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/index/index",
       "style": {
         "navigationBarTitleText": "测试"
@@ -29,7 +66,8 @@
   "easycom": {
     "autoscan": true,
     "custom": {
-      "mui-(.*)": "@miniprogram/mui/lib/mui/mui-$1/mui-$1.vue"
+      "mui-(.*)": "@miniprogram/mui/lib/mui/mui-$1/mui-$1.vue",
+      "uni-(.*)": "@miniprogram/mui/lib/uni/uni-$1/components/uni-$1/uni-$1.vue"
     }
   },
   "subPackages": [
@@ -79,5 +117,29 @@
         }
       ]
     }
-  ]
+  ],
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "text": "tabs1",
+        "pagePath": "tabs/tabs1/tabs1"
+      },
+      {
+        "text": "tabs2",
+        "pagePath": "tabs/tabs2/tabs2"
+      },
+      {
+        "text": "tabs3",
+        "pagePath": "tabs/tabs3/tabs3"
+      },
+      {
+        "text": "tabs4",
+        "pagePath": "tabs/tabs4/tabs4"
+      }
+    ]
+  }
 }

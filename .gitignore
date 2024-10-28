@@ -22,3 +22,6 @@ build
 *.sw?
 
 pnpm-lock.yaml
+
+mui/lib/uni
+.hbuilderx

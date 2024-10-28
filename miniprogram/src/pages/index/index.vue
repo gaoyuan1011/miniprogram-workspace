@@ -18,12 +18,12 @@ async function onClick() {
       a: 1,
     },
   ).catch(error => {
+	  console.info('error', error)
     if (error instanceof RouterInterruptError) {
       console.info('1')
     }
     return Promise.reject()
   })
-
 
   console.info('我出来了 home', aa)
 }

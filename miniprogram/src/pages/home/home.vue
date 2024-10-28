@@ -19,7 +19,7 @@ async function onClick() {
       query: { key: '1' },
     },
     {
-      a: 1,
+      a: 11111,
     },
   )
   console.info('我出来了 user', aa)
@@ -27,7 +27,7 @@ async function onClick() {
 
 onLoad((query) => {
   onNavigate(query, (event) => {
-    console.info(event)
+    console.info('event', event)
   })
 })
 </script>

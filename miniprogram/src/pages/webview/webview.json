@@ -1,0 +1,7 @@
+{
+  "style": {
+    "navigationBarTitleText": "扫码",
+	"navigationStyle": "custom"
+  },
+  "order": -2
+}

@@ -6,5 +6,5 @@ export function generateUUID() {
     const v = c === 'x' ? r : (r & 0x3 | 0x8)
     return v.toString(16)
   })
-  return uuid.replace('y', timestamp).replaceAll('-', '')
+  return uuid.replace('y', timestamp).replace(/-/g, '')
 }

@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { nav } from '@/nav'
+import { Router } from '@/router'
 
 const title = ref('Hello')
 
 function onBack() {
-  nav.back({ a: 1 })
+	nav.reLaunch({
+		url: Router.INDEX
+	})
+  // nav.back({ a: 1 })
 }
 </script>
 
@@ -22,7 +26,7 @@ function onBack() {
     </view>
 
     <button @click="onBack">
-      退出
+      退出1212
     </button>
   </view>
 </template>

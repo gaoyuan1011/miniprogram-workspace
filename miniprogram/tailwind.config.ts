@@ -24,12 +24,15 @@ if (isMp || isQuickapp)
   theme.screens = {}
 
 const config: Config = {
-  content: [
-    'src/**/*.{vue,ts}',
-    'src/main.ts',
-    'src/App.vue',
-    './index.html',
-  ],
+  content: {
+    relative: true,
+    files: [
+      './src/**/*.{vue,nvue,ts}',
+      './src/main.ts',
+      './src/App.vue',
+      './index.html',
+    ]
+  },
   corePlugins: {
     preflight: false,
     space: false,
