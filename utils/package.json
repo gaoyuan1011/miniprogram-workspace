@@ -2,6 +2,7 @@
   "name": "@uniappprogram/utils",
   "type": "module",
   "version": "0.0.1",
+  "private": false,
   "description": "",
   "author": "",
   "license": "ISC",

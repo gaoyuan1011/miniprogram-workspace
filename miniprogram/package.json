@@ -2,6 +2,7 @@
   "name": "miniprogram",
   "type": "module",
   "version": "0.0.0",
+  "private": false,
   "scripts": {
     "dev": "uni -p mp-weixin",
     "build": "uni build -p mp-weixin",

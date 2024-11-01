@@ -3,6 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "description": "",
+  "private": false,
   "author": "",
   "license": "ISC",
   "keywords": [],

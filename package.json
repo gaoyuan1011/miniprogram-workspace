@@ -5,6 +5,7 @@
   "description": "",
   "author": "",
   "license": "ISC",
+  "private": false,
   "keywords": [],
   "scripts": {
     "lint": "eslint .",
