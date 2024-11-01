@@ -1,5 +1,6 @@
 {
   "style": {
-    "navigationBarTitleText": "测试"
+    "navigationBarTitleText": "测试",
+	  "navigationStyle": "custom"
   }
 }

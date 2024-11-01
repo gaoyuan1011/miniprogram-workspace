@@ -1,5 +1,5 @@
 {
-  "name": "@miniprogram/request",
+  "name": "@uniappprogram/request",
   "type": "module",
   "version": "0.0.1",
   "description": "",
@@ -22,7 +22,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@miniprogram/utils": "workspace:0.0.1"
+    "@uniappprogram/utils": "workspace:0.0.1"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.3.2",

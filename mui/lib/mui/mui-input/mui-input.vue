@@ -5,7 +5,7 @@ const value = ref('')
 </script>
 
 <template>
-  <view class="flex flex-col w-[100%]">
+  <view class="flex flex-col">
     <input
       v-model="value"
       auto-focus

@@ -1,18 +1,27 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { nav } from '@/nav'
 import { Router } from '@/router'
 import { RouterInterruptError } from '@miniprogram/navigate'
 
-async function onClick() {
+const images = ref()
+
+async function onClickH5() {
+	
+	const query = { resolutions: '' }
+	// #ifdef APP
+	const cmr = plus.camera.getCamera()
+	query.resolutions = cmr.supportedImageResolutions?.[0]
+	// #endif
+	
   console.info('我进去了 home')
+  
+  // 判断下是否有摄像头权限
   const aa = await nav.navigate(
     {
       url: Router.HOME,
-      query: { key: '1' },
-    },
-    {
-      a: 1,
-    },
+      query,
+    }
   ).catch(error => {
 	  console.info('error', error)
     if (error instanceof RouterInterruptError) {
@@ -22,30 +31,32 @@ async function onClick() {
   })
 
   console.info('我出来了 home', aa)
+  images.value = aa
+  
+  
+}
+
+function previewImage() {
+	uni.previewImage({
+		urls: [images.value.file]
+	})
 }
 
 </script>
 
 <template>
   <view
-    class="flex flex-col items-center justify-center"
-    @click="onClick"
+	class="flex items-center justify-center"
   >
-    <view><text>tabs1</text></view>
-    <view><text>tabs1</text></view>
-    <view><text>tabs1</text></view>
-    <view><text>tabs1</text></view>
-    <view><text>tabs1</text></view>
-    <view><text>tabs1</text></view>
-
-    <view class="test" />
+    <view class="w-[450rpx] h-[200rpx] bg-[#ccc] rounded-[50rpx] p-[40rpx] flex justify-center items-center" @click="onClickH5">
+      <text class="text-[#1DA1F2]">H5拍照</text>
+    </view>
+  </view>
+  <view>
+  	<image v-if="images" mode="aspectFit" :src="images.file" @click="previewImage"></image>
   </view>
 </template>
 
 <style lang="scss">
-.test {
-	width: 300rpx;
-	height: 200rpx;
-	background-color: #000;
-}
+
 </style>

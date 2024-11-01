@@ -14,21 +14,7 @@ function onBack() {
 </script>
 
 <template>
-  <view class="flex flex-col items-center justify-center">
-    <image
-      class="w-[200rpx] h-[200rpx] mb-[50rpx] mx-auto"
-      src="@/assets/logo.png"
-    />
-    <view class="flex justify-center">
-      <text class="text-[36rpx] text-[#8f8f94]">
-        {{ title }}
-      </text>
-    </view>
-
-    <button @click="onBack">
-      退出1212
-    </button>
-  </view>
+  <view></view>
 </template>
 
 <style lang="scss" scoped>

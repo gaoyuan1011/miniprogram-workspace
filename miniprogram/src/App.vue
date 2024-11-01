@@ -16,5 +16,5 @@ onUnload(() => {
 </script>
 
 <style lang="scss">
-@import "./styles/tailwind.css"
+@import "./styles/tailwind.css";
 </style>

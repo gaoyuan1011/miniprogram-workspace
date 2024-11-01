@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <view class="flex flex-col w-[100%]">
+  <view class="flex flex-col">
     <button
       auto-focus
       placeholder="将会获取焦点"

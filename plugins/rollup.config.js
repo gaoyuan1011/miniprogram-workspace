@@ -31,5 +31,5 @@ export default {
       tsconfig: './tsconfig.json',
     }),
   ],
-  external: ['vite', 'chokidar', 'glob', 'hasha', 'ali-oss', 'miniprogram-ci'],
+  external: ['vite', 'chokidar', 'glob', 'hasha', 'ali-oss', 'miniprogram-ci', '@dcloudio/uni-cli-shared', '@uni-helper/uni-env', '@uni-helper/vite-plugin-uni-tailwind'],
 }

@@ -19,7 +19,9 @@ else {
   presets.push(elementPlusPreset())
 }
 
-const theme: Config['theme'] = {}
+const theme: Config['theme'] = {
+  extend: {},
+}
 if (isMp || isQuickapp)
   theme.screens = {}
 
@@ -27,8 +29,7 @@ const config: Config = {
   content: {
     relative: true,
     files: [
-      './src/**/*.{vue,nvue,ts}',
-      './src/main.ts',
+      './src/**/*.{vue,nvue}',
       './src/App.vue',
       './index.html',
     ]
@@ -37,6 +38,11 @@ const config: Config = {
     preflight: false,
     space: false,
     divideWidth: false,
+    divideOpacity: false,
+    textOpacity: false,
+    backgroundOpacity: false,
+    borderOpacity: false,
+    fontVariantNumeric: false,
   },
   divideColor: false,
   divideStyle: false,
@@ -44,7 +50,7 @@ const config: Config = {
   presets,
   theme,
   plugins: [
-    plugin(muiPlugin)
+    plugin(muiPlugin),
   ],
 }
 

@@ -3,14 +3,7 @@
 </script>
 
 <template>
-  <view class="flex flex-col items-center justify-center">
-    <view><text>tabs3</text></view>
-    <view><text>tabs3</text></view>
-    <view><text>tabs3</text></view>
-    <view><text>tabs3</text></view>
-    <view><text>tabs3</text></view>
-    <view><text>tabs3</text></view>
-  </view>
+  <view class="flex flex-col items-center justify-center" />
 </template>
 
 <style lang="scss" scoped>

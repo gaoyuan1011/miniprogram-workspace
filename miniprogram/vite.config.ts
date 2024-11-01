@@ -8,9 +8,8 @@ import nested from 'tailwindcss/nesting'
 import tailwindcss from 'tailwindcss'
 import uvtw from '@uni-helper/vite-plugin-uni-tailwind'
 import postcssPresetEnv from 'postcss-preset-env'
-import { vitePluginMiniPages } from '@miniprogram/plugins'
+import { vitePluginMiniPages, vitePluginUniCssTailwind, vitePluginUniTailwind } from '@miniprogram/plugins'
 import tailwindcssConfig from './tailwind.config'
-
 
 export default defineConfig(() => {
   // const env = loadEnv(result.mode, process.cwd(), '')
@@ -30,6 +29,8 @@ export default defineConfig(() => {
       },
     },
     plugins: [
+      vitePluginUniTailwind(),
+      vitePluginUniCssTailwind(),
       (uni as unknown as { default: () => Plugin[] }).default(),
       uvtw(),
       vitePluginMiniPages({

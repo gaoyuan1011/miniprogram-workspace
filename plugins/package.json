@@ -1,5 +1,5 @@
 {
-  "name": "@miniprogram/plugins",
+  "name": "@uniappprogram/plugins",
   "type": "module",
   "version": "0.0.1",
   "description": "",
@@ -23,6 +23,9 @@
     "build": "rollup -c"
   },
   "peerDependencies": {
+    "@dcloudio/uni-cli-shared": "3.0.0-4020920240930001",
+    "@uni-helper/vite-plugin-uni-tailwind": "^0.15.0",
+    "@uni-helper/uni-env": "^0.1.4",
     "ali-oss": "^6.20.0",
     "chokidar": "^3.6.0",
     "glob": "^10.3.12",
@@ -38,6 +41,8 @@
     "@rollup/plugin-typescript": "^11.1.6",
     "@types/ali-oss": "^6.16.11",
     "@types/node": "^18.17.1",
+    "magic-string": "^0.30.12",
+    "postcss": "^8.4.47",
     "rollup": "^4.13.0",
     "rollup-plugin-typescript2": "^0.36.0",
     "tslib": "^2.6.2"

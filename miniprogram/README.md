@@ -10,3 +10,6 @@
 每个页面下都需要有个[name].json文件
   style是小程序属性
   order为排序（生序）
+
+
+https://uniapp.dcloud.net.cn/tutorial/nvue-css.html

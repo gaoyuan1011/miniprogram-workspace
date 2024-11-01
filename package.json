@@ -1,5 +1,5 @@
 {
-  "name": "miniprogram-workspace",
+  "name": "uniappprogram",
   "type": "module",
   "version": "0.0.1",
   "description": "",
@@ -13,9 +13,14 @@
     "preinstall": "npx only-allow pnpm",
     "commitlint": "commitlint --edit",
     "commit": "cz",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "changeset": "changeset",
+    "vp": "changeset version",
+    "release": "pnpm -r --filter '!miniprogram' build && pnpm release:only",
+    "release:only": "changeset publish --registry=https://registry.npmjs.org/"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.9",
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@eslint/js": "^9.2.0",
