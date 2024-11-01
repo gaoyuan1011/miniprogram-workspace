@@ -1,9 +1,13 @@
 {
   "name": "@uniappprogram/plugins",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "private": false,
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
   "author": "",
   "license": "ISC",
   "keywords": [],

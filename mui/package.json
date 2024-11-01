@@ -1,11 +1,15 @@
 {
   "name": "@uniappprogram/mui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "type": "module",
   "private": false,
   "directories": {
     "lib": "lib"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "main": "build/index.js",
   "module": "build/index.js",

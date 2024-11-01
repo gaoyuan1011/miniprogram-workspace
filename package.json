@@ -18,7 +18,7 @@
     "changeset": "changeset",
     "vp": "changeset version",
     "release": "pnpm -r --filter '!miniprogram' build && pnpm release:only",
-    "release:only": "changeset publish --registry=https://registry.npmjs.org/"
+    "release:only": "changeset publish --access public --registry=https://registry.npmjs.org/"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.9",
